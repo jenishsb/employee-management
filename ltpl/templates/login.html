@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/alert-message.js' %}"></script>
+</head>
+<body>
+
+    {% if messages %}
+        <div class="container mt-2">
+            {% for message in messages %}
+            <div id="msg" class="alert alert-{{ message.tags }} alert-dismissible">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="d-flex justify-content-center mt-5">
+        <div class="col-sm-3">
+            <h2 class="text-center alert alert-info">Login</h2>
+            <form action="login" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <div class="d-flex justify-content-center">
+                    <input type="submit" value="Login" class="btn btn-primary" style="width:325px;">
+                </div>
+                 <div class="text-center pt-3">
+                     New here?
+                    <a class="text-decoration-none" href="signup">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

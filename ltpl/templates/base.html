@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+
+    <!-- Custom Files -->
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <script src="{% static 'js/alert-message.js' %}"></script>
+</head>
+<body>
+
+    <nav class="menu" tabindex="0">
+    <div class="smartphone-menu-trigger"></div>
+    <header class="avatar">
+        <img src="{% static 'images/user.png' %}" alt="Profile Photo" />
+        <h2>{{ logged_user.first_name }}</h2>
+        <a class="btn btn-light btn-sm mt-2" href="{% url 'myprofile' logged_user.first_name %}">My Profile</a>
+    </header>
+    <ul>
+        <li tabindex="0" class="icon-homepage">
+            <a id="homepage" href="homepage"><span>Home</span></a>
+        </li>
+        <li tabindex="0" class="icon-employees">
+            <a id="employees" href="showall"><span>Employees</span></a>
+        </li>
+        <li tabindex="0" class="icon-departments">
+            <a id="departments" href="all_departments"><span>Departments</span></a>
+        </li>
+        <li tabindex="0" class="icon-addresses">
+            <a id="addresses" href="addresses"><span>Addresses</span></a>
+        </li>
+        <li tabindex="0" class="icon-password">
+            <a id="password" href="password_reset"><span>Change Password</span></a>
+        </li>
+        <li tabindex="0" class="icon-logout">
+            <a id="logout" href="logoutuser" onclick="return confirm('Are you sure you want to Logout?')"><span>Logout</span></a>
+        </li>
+    </ul>
+    </nav>
+
+    {% if messages %}
+        <div class="container mt-2">
+            {% for message in messages %}
+            <div id="msg" class="alert alert-{{ message.tags }} alert-dismissible">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

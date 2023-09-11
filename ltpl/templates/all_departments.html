@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+All Departments
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <div class="justify-content-center input-group mb-4">
+      {% for department in all_departments %}
+        <a class="btn btn-outline-primary" href="{% url 'click_department_data' department.id %}">{{ department }}</a>
+      {% endfor %}
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="justify-content-center input-group mb-4">
+        <a class="btn btn-success" href="add_new_department">Add New Department</a>
+  </div>
+</div>
+
+{% endblock %}

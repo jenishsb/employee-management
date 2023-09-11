@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+    My Profile
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center mt-5">
+        <div class="col-sm-3">
+            <h2 class="text-center alert alert-info">Profile Page</h2>
+            <form action="{% url 'user_profile_edit' name %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group mt-3">
+                        <label for="{{ field.id_for_label }}">
+                            <b>{{ field.label_tag }}</b>
+                        </label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <div class="text-center mt-3">
+                    <input type="submit" name="update" value="Update" class="btn btn-primary">
+                    <input type="submit" name="delete" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ department }} Department Data
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <div class="justify-content-center input-group mb-4">
+      {% for department in all_departments %}
+        <a class="btn btn-outline-primary" href="{% url 'click_department_data' department.id %}">{{ department }}</a>
+      {% endfor %}
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="justify-content-center input-group mb-4">
+        <a class="btn btn-success" href="#">Add Employee Department</a>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="input-group mb-4">
+    <input type="text" id="tbSearch" class="form-control input-sm" onchange="matched()" placeholder="Search Department">
+  </div>
+  <script src="{% static 'js/search.js' %}"></script>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th>No</th>
+        <th>Department Name</th>
+        <th>Department ID</th>
+        <th>Employee Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+          {% for employee in department.employees.all %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ department.name }}</td>
+              <td>{{ department.name_id }}</td>
+              <td>
+                  {{ employee.first_name }} {{ employee.last_name }}
+              </td>
+              <td>
+                <form action="{% url 'emp_department' department.name_id employee.first_name %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" name="edit" value="Edit" class="btn btn-success btn-sm">
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
