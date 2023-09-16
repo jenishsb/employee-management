@@ -1,0 +1,4 @@
+/venv
+mypractice/__pycache__/
+ltpl/__pycache__/
+ltpl/migrations/
