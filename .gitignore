@@ -1,4 +1,5 @@
 /venv
 mypractice/__pycache__/
+mypractice/settings.py/
 ltpl/__pycache__/
 ltpl/migrations/
