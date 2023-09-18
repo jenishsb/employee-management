@@ -20,8 +20,8 @@
     <div class="smartphone-menu-trigger"></div>
     <header class="avatar">
         <img src="{% static 'images/user.png' %}" alt="Profile Photo" />
-        <h2>{{ logged_user.first_name }}</h2>
-        <a class="btn btn-light btn-sm mt-2" href="{% url 'myprofile' logged_user.first_name %}">My Profile</a>
+        <h2>{{ request.user }}</h2>
+        <a class="btn btn-light btn-sm mt-2" href="{% url 'myprofile' request.user %}">My Profile</a>
     </header>
     <ul>
         <li tabindex="0" class="icon-homepage">

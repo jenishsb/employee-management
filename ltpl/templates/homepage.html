@@ -8,6 +8,6 @@
 
 {% block content %}
     <div class="d-flex justify-content-center mt-5">
-        <h2 class="text-center alert alert-info">Welcome {{ logged_user.first_name }}</h2>
+        <h2 class="text-center alert alert-info">Welcome {{ request.user }}</h2>
     </div>
 {% endblock %}
