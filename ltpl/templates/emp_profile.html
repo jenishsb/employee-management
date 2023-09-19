@@ -8,13 +8,13 @@
     <div class="d-flex justify-content-center mt-5">
         <div class="col-sm-3">
             <h2 class="text-center alert alert-info">Profile Page</h2>
-            <form action="{% url 'editdata' name %}" method="POST">
+            <form method="POST">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="form-group mt-3">
-                        <label for="{{ field.id_for_label }}">
-                            <b>{{ field.label_tag }}</b>
-                        </label>
+                        {% comment %} <label for="{{ field.id_for_label }}"> {% endcomment %}
+                            {% comment %} <b>{{ field.label_tag }}</b> {% endcomment %}
+                        {% comment %} </label> {% endcomment %}
                         {{ field }}
                     </div>
                 {% endfor %}

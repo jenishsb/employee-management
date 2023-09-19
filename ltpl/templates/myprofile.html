@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-center mt-5">
         <div class="col-sm-3">
             <h2 class="text-center alert alert-info">Profile Page</h2>
-            <form action="{% url 'user_profile_edit' name %}" method="POST">
+            <form action="{% url 'user_profile_edit' %}" method="POST">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="form-group mt-3">

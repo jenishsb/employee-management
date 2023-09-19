@@ -84,13 +84,13 @@ WSGI_APPLICATION = 'mypractice.wsgi.application'
 # }
 
 
-# added manually - jenish
+# postgresql database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'employee_management',
         'USER': 'postgres',
-        'PASSWORD': 'Lemon@123',
+        'PASSWORD': 'Jenish@2003',
         'HOST': 'localhost',
         'PORT': '5432',
     }

@@ -9,7 +9,7 @@ All Employees
 
 <div class="container mt-4">
   <div class="justify-content-center input-group mb-4">
-        <a class="btn btn-success" href="add_new_employee">Add New Employee</a>
+        <a class="btn btn-success" href="add_employee">Add New Employee</a>
   </div>
 </div>
 
@@ -25,9 +25,11 @@ All Employees
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Gender</th>
-        <th>Username</th>
         <th>Phone No</th>
         <th>Email</th>
+        <th>Department</th>
+        <th>Username</th>
+        <th>Password</th>
         <th></th>
       </tr>
     </thead>
@@ -38,9 +40,11 @@ All Employees
         <td>{{ i.first_name }}</td>
         <td>{{ i.last_name }}</td>
         <td>{{ i.gender }}</td>
-        <td>{{ i.username }}</td>
         <td>{{ i.phno }}</td>
         <td>{{ i.email }}</td>
+        <td>{{ i.department }}</td>
+        <td>{{ i.username }}</td>
+        <td>{{ i.password }}</td>
         <td>
           <form action="{% url 'emp_profile' i.first_name %}" method="POST">
             {% csrf_token %}

@@ -11,9 +11,11 @@ GENDER_CHOICES = (
         ('Other', 'Other'),
     )
 
+
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Enter Username'}), label="")
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Password'}), label="")
+
 
 class SignUpForm(UserCreationForm):
     class Meta:
@@ -49,6 +51,7 @@ class SignUpForm(UserCreationForm):
         label=""
     )
 
+
 class User_profile(forms.ModelForm):
     class Meta:
         model = User
@@ -75,6 +78,7 @@ class User_profile(forms.ModelForm):
         label="Email:"
     )
 
+
 class Change_password(PasswordChangeForm):
     class Meta:
         model = User
@@ -94,8 +98,9 @@ class Change_password(PasswordChangeForm):
     )
 
 
-class Add_New_Employee(forms.ModelForm):
+class Add_Employee(forms.ModelForm):
     gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}), label='')
+    department = forms.ModelChoiceField(queryset=Departments.objects.all(), empty_label='--- Select Department ---', widget=forms.Select(attrs={'class': 'form-control'}), label='')
 
     class Meta:
         model = Employee
@@ -103,42 +108,37 @@ class Add_New_Employee(forms.ModelForm):
         labels = {
             'first_name': '',
             'last_name': '',
-            'username': '',
             'phno': '',
             'email': '',
+            'username': '',
             'password': '',
         }
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter First Name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Last Name'}),
-            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Create Username'}),
             'phno': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter Phone No'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter Email'}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Create Username'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Create Password'})
         }
 
-class ProfileForm(forms.ModelForm):
+
+class Emp_ProfileForm(Add_Employee):
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'username', 'phno', 'email']
-        labels = {
-            'first_name': 'First Name',
-            'last_name': 'Last Name',
-            'username': 'Username',
-            'phno': 'Phone No',
-            'email': 'Email',
-        }
+        fields = ['first_name', 'last_name', 'gender', 'phno', 'email', 'username', 'department']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter First Name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Last Name'}),
-            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Create Username'}),
             'phno': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter Phone No'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter Email'})
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter Email'}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Create Username'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Create Password'})
         }
 
-class Add_New_Department(forms.ModelForm):
+class Add_Department(forms.ModelForm):
     class Meta:
-        model = All_Departments
+        model = Departments
         fields = "__all__"
         labels = {
             'name': ''
@@ -147,16 +147,8 @@ class Add_New_Department(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add New Department'})
         }
 
-class Department_change(forms.ModelForm):
-    class Meta:
-        model = Department
-        fields = "__all__"
-        labels = {
-            'name': 'Department',
-            'employees': 'Employee Name'
-        }
 
-class Address_change(forms.ModelForm):
+class Address_Change(forms.ModelForm):
     class Meta:
         model = Address
         fields = "__all__"

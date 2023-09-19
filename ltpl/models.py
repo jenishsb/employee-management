@@ -1,7 +1,18 @@
 from __future__ import unicode_literals
 from django.db import models
 
-# added manually
+
+# Departments Model
+class Departments(models.Model):
+    department_name = models.CharField(max_length=50, primary_key=True)
+
+    class Meta:
+        db_table = "departments"
+
+    def __str__(self):
+        return self.department_name
+
+
 class Employee(models.Model):
     GENDER_CHOICES = (
         ('Select', '--- Select Gender ---'),
@@ -12,9 +23,10 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=12)
     last_name = models.CharField(max_length=12)
     gender = models.CharField(choices=GENDER_CHOICES, default='Select', max_length=12)
-    username = models.CharField(max_length=12, primary_key=True)
     phno = models.IntegerField()
     email = models.EmailField(max_length=30)
+    department = models.ForeignKey(Departments, on_delete=models.CASCADE, related_name='departments', null=True, blank=True)
+    username = models.CharField(max_length=12, primary_key=True)
     password = models.CharField(max_length=30)
 
     class Meta:
@@ -22,27 +34,6 @@ class Employee(models.Model):
 
     def __str__(self):
         return f'{self.username}'
-
-# All Departments Model
-class All_Departments(models.Model):
-    department_name = models.CharField(max_length=50)
-
-    class Meta:
-        db_table = "all_departments"
-
-    def __str__(self):
-        return self.department_name
-
-# Department Model
-class Department(models.Model):
-    name = models.ForeignKey(All_Departments, on_delete=models.CASCADE, related_name='departments')
-    employees = models.ManyToManyField(Employee, related_name='departments')
-
-    class Meta:
-        db_table = "department"
-
-    def __str__(self):
-        return str(self.name)
 
 
 # Address Model
