@@ -5,3 +5,4 @@ mypractice/settings.py
 ltpl/migrations/
 ltpl/__pycache__/
 mypractice/__pycache__/
+requirements.txt
