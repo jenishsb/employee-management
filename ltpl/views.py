@@ -131,8 +131,7 @@ def add_department(request):
             form.save()
             messages.success(request, 'Department Added Successfully...')
             return render(request, 'departments.html', {'departments': departments})
-        else:
-            pass
+            
     form = Add_Department()
     return render(request, 'add_department.html', {'form': form})
 
