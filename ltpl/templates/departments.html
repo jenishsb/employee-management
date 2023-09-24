@@ -23,36 +23,38 @@
   </div>
 </div>
 
-<div class="container mt-4">
-  <div class="input-group mb-4">
-    <input type="text" id="tbSearch" class="form-control input-sm" onchange="matched()" placeholder="Search Department">
-  </div>
-  <script src="{% static 'js/search.js' %}"></script>
-  <table class="table">
-    <thead class="table-dark">
-      <tr>
-        <th>No</th>
-        <th>Employee Name</th>
-        <th>Department Name</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for employee in employees %}
+{% if employees %}
+  <div class="container mt-4">
+    <div class="input-group mb-4">
+      <input type="text" id="tbSearch" class="form-control input-sm" onchange="matched()" placeholder="Search Employee">
+    </div>
+    <script src="{% static 'js/search.js' %}"></script>
+    <table class="table">
+      <thead class="table-dark">
         <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ employee.first_name }} {{ employee.last_name }}</td>
-          <td>{{ employee.department_id }}</td>
-          <td>
-            <form action="#" method="POST">
-              {% csrf_token %}
-              <input type="submit" name="edit" value="Edit" class="btn btn-success btn-sm">
-            </form>
-          </td>
+          <th>No</th>
+          <th>Employee Name</th>
+          <th>Department Name</th>
+          <th></th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        {% for employee in employees %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+            <td>{{ employee.department_id }}</td>
+            <td>
+              <form action="#" method="POST">
+                {% csrf_token %}
+                <input type="submit" name="edit" value="Edit" class="btn btn-success btn-sm">
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}
 
 {% endblock %}

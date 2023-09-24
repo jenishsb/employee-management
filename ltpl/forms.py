@@ -146,22 +146,3 @@ class Add_Department(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add New Department'})
         }
-
-
-class Address_Change(forms.ModelForm):
-    class Meta:
-        model = Address
-        fields = "__all__"
-        labels = {
-            'employee': 'Employee Name',
-            'street': 'Street',
-            'city': 'City',
-            'state': 'State',
-            'zipcode': 'Zipcode'
-        }
-        widgets = {
-            'street': forms.TextInput(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
-            'state': forms.TextInput(attrs={'class': 'form-control'}),
-            'zipcode': forms.TextInput(attrs={'class': 'form-control'})
-        }

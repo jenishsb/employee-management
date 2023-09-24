@@ -34,18 +34,3 @@ class Employee(models.Model):
 
     def __str__(self):
         return f'{self.username}'
-
-
-# Address Model
-class Address(models.Model):
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name='address')
-    street = models.CharField(max_length=100)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    zipcode = models.CharField(max_length=10)
-
-    class Meta:
-        db_table = "address"
-
-    def __str__(self):
-        return f'Address of {self.employee.username}'

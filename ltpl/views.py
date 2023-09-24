@@ -58,7 +58,7 @@ def myprofile(request):
 
 
 def user_profile_edit(request):
-    user = User.objects.get(first_name=request.user)
+    user = User.objects.get(username=request.user)
     if request.method == 'POST':
         form = User_profile(request.POST, instance=user)
         if form.is_valid():
@@ -122,9 +122,6 @@ def click_department_data(request,dept):
     employees = Employee.objects.filter(department_id=dept)
     return render(request, 'departments.html', {'departments': departments, 'department': department[0], 'employees': employees})
 
-def emp_department(request):
-    pass
-
 
 def add_department(request):
     departments = Departments.objects.all()
@@ -138,33 +135,6 @@ def add_department(request):
             pass
     form = Add_Department()
     return render(request, 'add_department.html', {'form': form})
-
-
-def addresses(request):
-    emp_addresses = Address.objects.all()
-    return render(request, 'emp_addresses.html', {'user': emp_addresses})
-
-
-def address_edit(request, emp):
-    emp_address = Address.objects.get(employee_id=emp)
-    form = Address_Change(initial={'employee': emp, 'street': emp_address.street, 'city': emp_address.city, 'state': emp_address.state, 'zipcode': emp_address.zipcode})
-    return render(request, 'address_edit.html', {'form': form, 'employee': emp})
-
-
-def address_changed(request, emp):
-    emp_addresses = Address.objects.all()
-    emp_address = Address.objects.get(employee_id=emp)
-    if request.method == 'POST':
-        form = Emp_ProfileForm(request.POST, instance=emp_address)
-        if form.is_valid():
-            if request.POST.get('update') == 'Update':
-                form.save()
-                messages.success(request, 'Data Updated Successfully...')
-                return render(request, 'showall.html', {'user': emp_addresses})
-    else:
-        pass
-    form = Address_Change(initial={'employee': emp, 'street': emp_address.street, 'city': emp_address.city, 'state': emp_address.state, 'zipcode': emp_address.zipcode})
-    return render(request, 'address_edit.html', {'form': form, 'employee': emp})
 
 
 def logoutuser(request):
